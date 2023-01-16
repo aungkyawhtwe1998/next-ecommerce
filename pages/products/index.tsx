@@ -2,16 +2,15 @@ import { GetServerSideProps, NextPage } from "next";
 // import { Prisma } from "@prisma/client";
 import { prisma } from "../../lib/prisma";
 import { useRouter } from "next/router";
-import {useState } from "react";
+import { useState } from "react";
 import Header from "../../comps/Header";
 import Link from "next/link";
 import { Categories, Category, Product, Products } from "../../type";
-interface Props{
-  products:Products
-  categories:Categories
+interface Props {
+  products: Products;
+  categories: Categories;
 }
-const Home:NextPage<Props> = ({products, categories}) => {
-
+const Home: NextPage<Props> = ({ products, categories }) => {
   const [form, setForm] = useState<Product>({
     name: "",
     price: 0,
@@ -53,7 +52,7 @@ const Home:NextPage<Props> = ({products, categories}) => {
         headers: {
           "Content-Type": "application/json",
         },
-        method: "DELETe",
+        method: "DELETE",
       }).then(() => {
         refreshData();
       });
@@ -71,13 +70,18 @@ const Home:NextPage<Props> = ({products, categories}) => {
   };
   return (
     <>
-      <div className="container px-4 mx-auto">
       <Header />
 
+      <div className="container px-4 mx-auto">
         <div className="flex justify-between mb-2">
           <h1 className="w- text-center font-bold text-2xl">Products</h1>
+
           <button className="bg-blue-700 rounded px-2">
-            <Link href="/product-categories" className="text-sm">Categories Management</Link>
+            <Link
+              href="/product-categories"
+              className="text-sm">
+              Categories Management
+            </Link>
           </button>
         </div>
 
@@ -113,13 +117,14 @@ const Home:NextPage<Props> = ({products, categories}) => {
               onChange={(e) =>
                 setForm({ ...form, categoryId: parseInt(e.target.value) })
               }
-              className="border-2 rounded border-gray-600 p-1"
-            >
-              {
-                categories.map((cate:Category)=>(
-                  <option key={cate.id} value={cate.id}>{cate.name}</option>
-                ))
-              }
+              className="border-2 rounded border-gray-600 p-1">
+              {categories.map((cate: Category) => (
+                <option
+                  key={cate.id}
+                  value={cate.id}>
+                  {cate.name}
+                </option>
+              ))}
             </select>
             <label>Quantity</label>
             <input
@@ -198,20 +203,20 @@ export const getServerSideProps: GetServerSideProps = async () => {
       price: true,
       quantity: true,
       categoryId: true,
-      category:{
-        select:{
-          name:true,
-          id:true
-        }
-      }
+      category: {
+        select: {
+          name: true,
+          id: true,
+        },
+      },
     },
   });
   const categories = await prisma.category.findMany({
-    select:{
-      name:true,
-      id:true
-    }
-  })
+    select: {
+      name: true,
+      id: true,
+    },
+  });
   console.log(categories);
   return {
     props: { products, categories },

@@ -21,3 +21,14 @@ export interface Categories{
     [x: string]: any;
     categories:Category[]
   }
+
+export interface OrderItem{
+  productId:number,
+  quantity:number,
+  price:number
+}
+export interface Order{
+  id:number;
+  customerId:number,
+  orderItems:OrderItem[],
+}
