@@ -24,6 +24,8 @@ const Home: NextPage<Props> = ({ products, categories }) => {
   };
 
   async function create(data: Product) {
+    console.log(data);
+
     try {
       fetch("http://localhost:3000/api/products/create", {
         body: JSON.stringify(data),
@@ -32,14 +34,27 @@ const Home: NextPage<Props> = ({ products, categories }) => {
         },
         method: "POST",
       }).then(() => {
-        if (data.id) {
-          deleteProduct(data.id);
-          setForm({ name: "", quantity: 1, price: 0, categoryId: 0 });
-          refreshData();
-        } else {
-          setForm({ name: "", quantity: 1, price: 0, categoryId: 0 });
-          refreshData();
-        }
+        setForm({ name: "", quantity: 1, price: 0, categoryId: 0 });
+        refreshData();
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function update(data: Product) {
+    console.log("update", data);
+
+    try {
+      fetch(`http://localhost:3000/api/products/update`, {
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "PUT",
+      }).then(() => {
+        setForm({ name: "", quantity: 1, price: 0, categoryId: 0 });
+        refreshData();
       });
     } catch (error) {
       console.log(error);
@@ -63,7 +78,11 @@ const Home: NextPage<Props> = ({ products, categories }) => {
 
   const handleSubmit = async (data: Product) => {
     try {
-      create(data);
+      if (data.id) {
+        update(data);
+      } else {
+        create(data);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -140,7 +159,7 @@ const Home: NextPage<Props> = ({ products, categories }) => {
             <button
               type="submit"
               className="bg-blue-500 text-white rounded p-1">
-              Add +
+              {form.id ? "Update" : "Add"}
             </button>
           </form>
           <div className="w-auto bg-gray-800 ml-5 p-3 min-w-[70%] h-[80vh] overflow-y-scroll max-w-min mx-auto space-y-6 flex-col items-start">

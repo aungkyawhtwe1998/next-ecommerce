@@ -3,6 +3,9 @@ import { prisma } from "../lib/prisma";
 import Header from "../comps/Header";
 import ProductItem from "../comps/ProductItem";
 import { ShoppingCartProvider } from "../context/ShoppingCartContext";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store";
+// import { decrement, increment, selectValue } from "../features/counter/CounterSlice";
 
 interface Products {
   products: {
@@ -15,15 +18,23 @@ interface Products {
 }
 
 const Home = ({ products }: Products) => {
+  // const count = useSelector(selectValue) 
+  const dispatch = useDispatch()
+
   return (
     <ShoppingCartProvider>
       <Header />
+      {/* <h1>The vallue of count is {count}</h1>
+      <button onClick={()=>dispatch(increment())} className="w-full h-10 bg-green-400">increment</button>
 
-      <div className="container px-4 mx-auto">
-        <h1 className="text-center font-bold text-2xl mt-4">Products</h1>
+      <button onClick={()=>dispatch(decrement())} className="w-full h-10 bg-red-400">decrement</button> */}
 
-        <div className="w-auto min-w-[60%] h-max overflow-y-scroll max-w-min mt-20 mx-auto space-y-6 flex-col items-start">
-          <div className="grid grid-cols-4 gap-4">
+
+      <div className="container mx-auto">
+        <h1 className="text-center font-bold text-2xl mt-2">Products</h1>
+
+        <div className="w-auto min-w-[100%] h-max overflow-y-scroll max-w-min mt-2 mx-auto flex-col items-start">
+          <div className="grid grid-cols-5 gap-5 h-[150px]">
             {products.map((product) => (
               <ProductItem
                 key={product.id}

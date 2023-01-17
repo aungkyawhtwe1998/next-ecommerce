@@ -1,13 +1,19 @@
+import { useDispatch } from "react-redux";
 import { useShoppingCart } from "../context/ShoppingCartContext";
+import { decrementQuantity, incrementQuantity, removeItem } from "../features/cart/CartSlice";
+import { formatCurrency } from "../utils/formatCurrenc";
 
-type CartItemProps = {
-  id: number;
-  quantity: number;
-};
-const CartItem = ({ id, quantity }: CartItemProps) => {
+// type CartItemProps = {
+//   id: number;
+//   price:number;
+//   name:string;
+//   count:number;
+// };
+const CartItem = ({ id,name, price, count }: any) => {
+  const dispatch = useDispatch();
   //   const [products, setProducts] = useState<Product[]>([]);
-  const { increaseCartQuantity, decreaseCartQuantity, removeFromCart } =
-    useShoppingCart();
+  // const { increaseCartQuantity, decreaseCartQuantity, removeFromCart } =
+  //   useShoppingCart();
   //   const getProducts = async () => {
   //     const data = await prisma.product.findMany({
   //       select: {
@@ -31,7 +37,7 @@ const CartItem = ({ id, quantity }: CartItemProps) => {
     <div className="bg-gray-800 mb-1 rounded shadow p-3 ">
       <div className="w-[300] flex flex-col ">
         <div className="flex-1 my-3">
-          <h3 className="font-bold text-xl">{id}</h3>
+          <h3 className="font-bold text-xl">{name} | {formatCurrency(price)}</h3>
           {/* <span className="font-bold mt-2 text-orange-400 text-sm">
             {formatCurrency(item.price)}
           </span> */}
@@ -40,19 +46,19 @@ const CartItem = ({ id, quantity }: CartItemProps) => {
         <div className="flex align-middle justify-between">
           <button
             className="bg-blue-500 px-3 text-center rounded"
-            onClick={() => decreaseCartQuantity(id)}>
+            onClick={() => dispatch(decrementQuantity(id))}>
             -
           </button>
-          <span className="px-4">{quantity}</span>
+          <span className="px-4">{count}</span>
           <button
             className="bg-blue-500 px-3 text-center rounded"
-            onClick={() => increaseCartQuantity(id)}>
+            onClick={() => dispatch(incrementQuantity(id))}>
             +
           </button>
         </div>
         <button
           className="bg-red-500 px-3 mt-2 text-center rounded"
-          onClick={() => removeFromCart(id)}>
+          onClick={() => dispatch(removeItem(id))}>
           Remove
         </button>
       </div>

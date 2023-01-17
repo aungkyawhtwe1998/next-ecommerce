@@ -1,10 +1,20 @@
+import { useDispatch, useSelector } from "react-redux";
 import { useShoppingCart } from "../context/ShoppingCartContext";
+import { closeCart, selectItems } from "../features/cart/CartSlice";
 import CartItem from "./CartItem";
 type ShoppingCartProps = {
   isOpen: boolean;
 };
+type CartItemProps = {
+  id: number;
+  price:number;
+  name:string;
+  count:number;
+};
 const OrderModal = ({ isOpen }: ShoppingCartProps) => {
-  const { cartItems, closeCart } = useShoppingCart();
+  // const { cartItems, closeCart } = useShoppingCart();
+  const cartItems = useSelector(selectItems);
+  const dispatch = useDispatch();
   if (!isOpen) return null;
   return (
     <div className="top-0 right-0 fixed bg-gray-700 min-w-[25vw] min-h-full p-3">
@@ -13,7 +23,7 @@ const OrderModal = ({ isOpen }: ShoppingCartProps) => {
 
         <button
           className="text-red-300"
-          onClick={closeCart}>
+          onClick={() => dispatch(closeCart())}>
           Close
         </button>
       </div>
