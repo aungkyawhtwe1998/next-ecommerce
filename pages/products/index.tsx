@@ -3,7 +3,7 @@ import { GetServerSideProps, NextPage } from "next";
 import { prisma } from "../../lib/prisma";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import Header from "../../comps/Header";
+import Header from "../../components/Header";
 import Link from "next/link";
 import { Categories, Category, Product, Products } from "../../type";
 interface Props {

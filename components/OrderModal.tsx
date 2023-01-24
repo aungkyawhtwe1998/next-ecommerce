@@ -35,6 +35,9 @@ const OrderModal = ({ isOpen }: ShoppingCartProps) => {
           />
         ))}
       </div>
+      <div>
+        <button className="w-full bg-blue-900 p-2">Order Now</button>
+      </div>
     </div>
   );
 };

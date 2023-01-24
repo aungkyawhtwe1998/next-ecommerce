@@ -2,12 +2,26 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { cartQuantity, openCart, isOpen } from "../features/cart/CartSlice";
 import OrderModal from "./OrderModal";
+import { signIn, useSession, signOut } from "next-auth/react";
 
 const Header = () => {
   // const { openCart } = useShoppingCart();
   const dispatch = useDispatch();
   const cartQty = useSelector(cartQuantity);
   const isOpened = useSelector(isOpen);
+  const { data, status } = useSession();
+  console.log(data, status);
+  const handleSignIn =async () => {
+    await signIn('github', {
+      callbackUrl:'http://localhost:3000/products',
+    })
+  }
+
+  const handleLogout = async ()=>{
+    await signOut({
+      callbackUrl:'http://localhost:3000/',
+    })
+  }
   return (
     <div className=" bg-gray-800">
       <div className="container mx-auto">
@@ -35,14 +49,34 @@ const Header = () => {
                   Home
                 </span>
               </Link>
-              <Link href="/products">
-                <span className="block mt-4 p-3 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
-                  Admin
-                </span>
-              </Link>
+              {
+                status === 'authenticated'?(
+                  <Link href="/products">
+                  <span className="block mt-4 p-3 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                    Admin Dashboard
+                  </span>
+                </Link>
+                ):(<></>)
+              }
+             
             </div>
           </div>
           <div className="bg-gray-900 bg-opacity-30">
+            {status === "authenticated" ? (
+              <button
+                className="bg-yellow-700 mr-2 text-white px-3 py-2 rounded hover:scale-95 transition text-xl"
+                onClick={()=>handleLogout()}
+                >
+                Logout
+              </button>
+            ) : (
+              <button
+                className="bg-yellow-500 mr-2 text-white px-3 py-2 rounded hover:scale-95 transition text-xl"
+                onClick={() =>handleSignIn()}>
+                Admin Login
+              </button>
+            )}
+
             <button
               className="bg-blue-600 text-white px-3 py-2 rounded hover:scale-95 transition text-xl"
               onClick={() => dispatch(openCart())}>

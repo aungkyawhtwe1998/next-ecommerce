@@ -1,7 +1,7 @@
 import { GetServerSideProps, NextPage } from "next";
 import { prisma } from "../lib/prisma";
-import Header from "../comps/Header";
-import ProductItem from "../comps/ProductItem";
+import Header from "../components/Header";
+import ProductItem from "../components/ProductItem";
 import { ShoppingCartProvider } from "../context/ShoppingCartContext";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";

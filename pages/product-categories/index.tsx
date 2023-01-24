@@ -3,7 +3,7 @@ import { GetServerSideProps } from "next";
 import { prisma } from "../../lib/prisma";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import Header from "../../comps/Header";
+import Header from "../../components/Header";
 import { Categories, Category } from "../../type";
 
 const ProuctCategories = ({ categories }: Categories) => {

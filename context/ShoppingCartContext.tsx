@@ -1,5 +1,5 @@
 import { ReactNode, useContext, createContext, useState } from "react";
-import OrderModal from "../comps/OrderModal";
+import OrderModal from "../components/OrderModal";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
 type ShoppingCartProviderProps = {
