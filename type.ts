@@ -32,3 +32,11 @@ export interface Order{
   customerId:number,
   orderItems:OrderItem[],
 }
+
+export interface Customer{
+  id:number,
+  name:string,
+  email:string,
+  password:string,
+  passcode:number,
+}

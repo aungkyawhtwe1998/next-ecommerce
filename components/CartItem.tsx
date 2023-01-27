@@ -1,6 +1,11 @@
+import { useSession } from "next-auth/react";
 import { useDispatch } from "react-redux";
 import { useShoppingCart } from "../context/ShoppingCartContext";
-import { decrementQuantity, incrementQuantity, removeItem } from "../features/cart/CartSlice";
+import {
+  decrementQuantity,
+  incrementQuantity,
+  removeItem,
+} from "../features/cart/CartSlice";
 import { formatCurrency } from "../utils/formatCurrenc";
 
 // type CartItemProps = {
@@ -9,7 +14,8 @@ import { formatCurrency } from "../utils/formatCurrenc";
 //   name:string;
 //   count:number;
 // };
-const CartItem = ({ id,name, price, count }: any) => {
+const CartItem = ({ id, name, price, count }: any) => {
+  const {status} = useSession();
   const dispatch = useDispatch();
   //   const [products, setProducts] = useState<Product[]>([]);
   // const { increaseCartQuantity, decreaseCartQuantity, removeFromCart } =
@@ -34,35 +40,47 @@ const CartItem = ({ id,name, price, count }: any) => {
   //   const item = products.find((i) => i.id === id);
   //   if (item == null) return null;
   return (
-    <div className="bg-gray-800 mb-1 rounded shadow p-3 ">
-      <div className="w-[300] flex flex-col ">
-        <div className="flex-1 my-3">
-          <h3 className="font-bold text-xl">{name} | {formatCurrency(price)}</h3>
-          {/* <span className="font-bold mt-2 text-orange-400 text-sm">
-            {formatCurrency(item.price)}
-          </span> */}
-        </div>
-
-        <div className="flex align-middle justify-between">
-          <button
-            className="bg-blue-500 px-3 text-center rounded"
-            onClick={() => dispatch(decrementQuantity(id))}>
-            -
-          </button>
-          <span className="px-4">{count}</span>
-          <button
-            className="bg-blue-500 px-3 text-center rounded"
-            onClick={() => dispatch(incrementQuantity(id))}>
-            +
-          </button>
-        </div>
+    <li className="py-3 sm:py-4">
+    <div className="flex items-center space-x-4">
+      <div className="flex-shrink-0">
+        <img
+          className="w-8 h-8 rounded-full"
+          src="https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/422992/sub/goods_422992_sub14.jpg?width=1600&impolicy=quality_75"
+          alt="product image"
+        />
+      </div>
+      <div className="flex-1 min-w-0">
+        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+        {name}
+        </p>
+        <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+        {formatCurrency(price)}
+        </p>
+      </div>
+      <div className="flex flex-col items-center text-base font-semibold text-gray-900 dark:text-white">
+      <div className="flex  align-middle justify-between">
         <button
-          className="bg-red-500 px-3 mt-2 text-center rounded"
-          onClick={() => dispatch(removeItem(id))}>
-          Remove
+          className="bg-blue-500 px-3 text-center rounded"
+          onClick={() => dispatch(decrementQuantity(id))}>
+          -
+        </button>
+        <span className="px-4">{count}</span>
+        <button
+          className="bg-blue-500 px-3 text-center rounded"
+          onClick={() => dispatch(incrementQuantity(id))}>
+          +
         </button>
       </div>
+     
+      </div>
+      
     </div>
+    <button
+        className="bg-red-500 px-3 mt-2 text-center rounded"
+        onClick={() => dispatch(removeItem(id))}>
+        Remove
+      </button>
+  </li>
   );
 };
 

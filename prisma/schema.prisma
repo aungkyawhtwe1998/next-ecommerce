@@ -20,6 +20,18 @@ model Product {
   createdAt DateTime @default(now())
 }
 
+model Order {
+  id Int @id @default(autoincrement())
+  orderId String
+  customer Customer @relation(fields: [customerId], references: [id])
+  customerId Int
+  productId Int
+  productName String
+  productPrice Int
+  productCount Int
+  createdAt DateTime @default(now())
+}
+
 model Category {
   id Int @id @default(autoincrement())
   name String @unique
@@ -63,6 +75,15 @@ model User {
   sessions      Session[]
 }
 
+model Customer {
+  id       Int        @id @default(autoincrement())
+  name     String
+  email    String     @unique
+  password String
+  passcode Int
+  order Order[]
+}
+
 model VerificationToken {
   identifier String
   token      String   @unique
@@ -70,3 +91,4 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { cartQuantity, openCart, isOpen } from "../features/cart/CartSlice";
 import OrderModal from "./OrderModal";
-import { signIn, useSession, signOut } from "next-auth/react";
+import { signIn, useSession, signOut, getSession } from "next-auth/react";
 
 const Header = () => {
   // const { openCart } = useShoppingCart();
@@ -10,7 +10,7 @@ const Header = () => {
   const cartQty = useSelector(cartQuantity);
   const isOpened = useSelector(isOpen);
   const { data, status } = useSession();
-  console.log(data, status);
+  const session = getSession();
   const handleSignIn =async () => {
     await signIn('github', {
       callbackUrl:'http://localhost:3000/products',
@@ -50,7 +50,7 @@ const Header = () => {
                 </span>
               </Link>
               {
-                status === 'authenticated'?(
+                status === "authenticated" && data?.user?.email==="aungkyawhtwe.mdy49@gmail.com"?(
                   <Link href="/products">
                   <span className="block mt-4 p-3 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
                     Admin Dashboard

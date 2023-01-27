@@ -31,10 +31,9 @@ const Home = ({ products }: Products) => {
 
 
       <div className="container mx-auto">
-        <h1 className="text-center font-bold text-2xl mt-2">Products</h1>
 
         <div className="w-auto min-w-[100%] h-max overflow-y-scroll max-w-min mt-2 mx-auto flex-col items-start">
-          <div className="grid grid-cols-5 gap-5 h-[150px]">
+          <div className="grid grid-cols-4 gap-5">
             {products.map((product) => (
               <ProductItem
                 key={product.id}
