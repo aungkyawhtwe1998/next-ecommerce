@@ -12,6 +12,7 @@ interface Products {
     id: number;
     name: string;
     price: number;
+    imageUrl:string;
     quantity: number;
     categoryId: number;
   }[];
@@ -53,11 +54,11 @@ export const getServerSideProps: GetServerSideProps = async () => {
       name: true,
       id: true,
       price: true,
+      imageUrl:true,
       quantity: true,
       categoryId: true,
     },
   });
-  console.log(products);
   return {
     props: { products },
   };

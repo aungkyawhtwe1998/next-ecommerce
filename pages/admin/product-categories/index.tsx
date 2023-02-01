@@ -1,10 +1,10 @@
 import { GetServerSideProps } from "next";
 // import { Prisma } from "@prisma/client";
-import { prisma } from "../../lib/prisma";
+import { prisma } from "../../../lib/prisma";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import Header from "../../components/Header";
-import { Categories, Category } from "../../type";
+import Header from "../../../components/Header";
+import { Categories, Category } from "../../../type";
 
 const ProuctCategories = ({ categories }: Categories) => {
   const [form, setForm] = useState<Category>({ name: "" });

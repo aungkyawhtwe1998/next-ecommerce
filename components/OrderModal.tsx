@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useShoppingCart } from "../context/ShoppingCartContext";
-import { closeCart, removeItem, selectItems } from "../features/cart/CartSlice";
+import { closeCart, removeAllItems, selectItems } from "../features/cart/CartSlice";
 import { selectCustomer } from "../features/customer/CustomerSlice";
 import apiInstance from "../lib/url";
 import CartItem from "./CartItem";
@@ -13,24 +13,21 @@ const OrderModal = ({ isOpen }: ShoppingCartProps) => {
   // const { cartItems, closeCart } = useShoppingCart();
   const cartItems = useSelector(selectItems);
   const customer = useSelector(selectCustomer);
-  console.log("from ordermodel", customer);
   const dispatch = useDispatch();
   const handleOrder = async () => {
     const orderId = uuidv4();
     try {
-      for await (const item of cartItems) {
-        const res = await apiInstance.post(`/orders/create`, {
-          customerId: customer,
-          orderId: orderId,
-          productId: item.id,
-          productName: item.name,
-          productPrice: item.price,
-          productCount: item.count,
-        });
-        if (res) {
-          dispatch(removeItem(Number(item.id)));
-          console.log("order success");
-        }
+      // for await (const item of cartItems) {
+        
+      // }
+      const res = await apiInstance.post(`/orders/create`, {
+        customerId: customer,
+        orderId: orderId,
+        orderItems:cartItems
+      });
+      if (res.data) {
+        dispatch(removeAllItems());
+        console.log("order success");
       }
     } catch (error) {
       console.log(error);

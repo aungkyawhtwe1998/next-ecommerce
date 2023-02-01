@@ -65,6 +65,9 @@ export const cartSlice = createSlice({
       );
       state.items = removeItem;
     },
+    removeAllItems: (state) => {
+      state.items.splice(0, state.items.length)
+    },
   },
 });
 
@@ -75,6 +78,7 @@ export const {
   incrementQuantity,
   decrementQuantity,
   removeItem,
+  removeAllItems
 } = cartSlice.actions;
 
 export const selectItems = (state: RootState) => state.cart.items;

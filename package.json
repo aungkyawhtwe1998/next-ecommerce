@@ -34,6 +34,8 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
+    "@types/formidable": "^2.0.5",
+    "@types/mime": "^3.0.1",
     "@types/uuid": "^9.0.0",
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.21",

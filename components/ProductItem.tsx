@@ -11,7 +11,7 @@ import {
 import { Product } from "../type";
 import { formatCurrency } from "../utils/formatCurrenc";
 
-const ProductItem = ({ id, name, price, categoryId, quantity }: Product) => {
+const ProductItem = ({ id, name, price,imageUrl, categoryId, quantity }: Product) => {
   // const {
   //   getItemQuantity,
   //   increaseCartQuantity,
@@ -31,6 +31,7 @@ const ProductItem = ({ id, name, price, categoryId, quantity }: Product) => {
           id,
           name,
           price,
+          imageUrl,
           quantity,
           categoryId,
         })
@@ -46,21 +47,21 @@ const ProductItem = ({ id, name, price, categoryId, quantity }: Product) => {
       <div
         key={id}
         className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-        <a href="#">
+        <div>
           <img
-            className="p-8 rounded-t-lg"
-            src="https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/422992/sub/goods_422992_sub14.jpg?width=1600&impolicy=quality_75"
+            className="p-8 w-52 mx-auto rounded h-52 rounded-t-lg"
+            src={imageUrl}
             alt="product image"
           />
-        </a>
+        </div>
         <div className="px-5 pb-5">
           <a href="#">
-            <h5 className="text-l font-semibold tracking-tight text-gray-900 dark:text-white">
+            <h4 className="text-l text-center font-semibold tracking-tight text-gray-900 dark:text-white">
               {name}
-            </h5>
+            </h4>
           </a>
           <div className="flex flex-col items-center justify-between">
-            <span className="text-3xl mb-2 font-bold text-gray-900 dark:text-white">
+            <span className="text-xl mb-2 font-bold text-gray-900 dark:text-white">
               {formatCurrency(price)}
             </span>
             {item?.count == undefined ? (
@@ -75,19 +76,19 @@ const ProductItem = ({ id, name, price, categoryId, quantity }: Product) => {
                 <div className="flex align-middle justify-between">
                   <button
                     className="bg-blue-500 px-3 text-center rounded"
-                    onClick={() => dispatch(decrementQuantity(id))}>
+                    onClick={() => dispatch(decrementQuantity(Number(id)))}>
                     -
                   </button>
                   <span className="px-4">{item?.count}</span>
                   <button
                     className="bg-blue-500 px-3 text-center rounded"
-                    onClick={() => dispatch(incrementQuantity(id))}>
+                    onClick={() => dispatch(incrementQuantity(Number(id)))}>
                     +
                   </button>
                 </div>
                 <button
                   className="bg-red-500 px-3 mt-2 text-center rounded"
-                  onClick={() => dispatch(removeItem(id))}>
+                  onClick={() => dispatch(removeItem(Number(id)))}>
                   Remove
                 </button>
               </div>

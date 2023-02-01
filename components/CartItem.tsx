@@ -14,7 +14,7 @@ import { formatCurrency } from "../utils/formatCurrenc";
 //   name:string;
 //   count:number;
 // };
-const CartItem = ({ id, name, price, count }: any) => {
+const CartItem = ({ id, name,imageUrl, price, count }: any) => {
   const {status} = useSession();
   const dispatch = useDispatch();
   //   const [products, setProducts] = useState<Product[]>([]);
@@ -43,11 +43,11 @@ const CartItem = ({ id, name, price, count }: any) => {
     <li className="py-3 sm:py-4">
     <div className="flex items-center space-x-4">
       <div className="flex-shrink-0">
-        <img
-          className="w-8 h-8 rounded-full"
-          src="https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/422992/sub/goods_422992_sub14.jpg?width=1600&impolicy=quality_75"
-          alt="product image"
-        />
+      <img
+            className="p-8 rounded-t-lg w-32 h-32"
+            src={imageUrl}
+            alt="product image"
+          />
       </div>
       <div className="flex-1 min-w-0">
         <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
