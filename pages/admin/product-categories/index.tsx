@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import Header from "../../../components/Header";
 import { Categories, Category } from "../../../type";
+import apiInstance from "../../../lib/url";
 
 const ProuctCategories = ({ categories }: Categories) => {
   const [form, setForm] = useState<Category>({ name: "" });
@@ -16,22 +17,15 @@ const ProuctCategories = ({ categories }: Categories) => {
 
   async function create(data: Category) {
     try {
-      fetch("http://localhost:3000/api/product-categories/create", {
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "POST",
-      }).then(() => {
-        if (data.id) {
-          deleteProduct(data.id);
-          setForm({ name: "" });
-          refreshData();
-        } else {
-          setForm({ name: "" });
-          refreshData();
-        }
-      });
+      const res = await apiInstance.post(`/product-categories/create`);
+      if(res.data){
+        deleteProduct(res.data.id);
+        setForm({ name: "" });
+        refreshData();
+      } else {
+        setForm({ name: "" });
+        refreshData();
+      }
     } catch (error) {
       console.log(error);
     }
@@ -39,14 +33,12 @@ const ProuctCategories = ({ categories }: Categories) => {
 
   async function deleteProduct(id: number) {
     try {
-      fetch(`http://localhost:3000/api/product-categories/${id}`, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "DELETE",
-      }).then(() => {
+      const res = await apiInstance.delete(`/product-categories/${id}`);
+      if(res){
         refreshData();
-      });
+
+      }
+      
     } catch (error) {
       console.log(error);
     }
