@@ -3,7 +3,7 @@ import { signIn } from "next-auth/react";
 const signin = () => {
     const handleSignIn = async () => {
         await signIn("github", {
-          callbackUrl: "http://localhost:3000/admin/products",
+          callbackUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/admin/products`,
         });
       };
   return (

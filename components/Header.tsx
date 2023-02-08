@@ -26,7 +26,7 @@ const Header = () => {
 
   const handleLogout = async () => {
     await signOut({
-      callbackUrl: "http://localhost:3000/",
+      callbackUrl: `${process.env.NEXT_PUBLIC_BASE_URL}`,
     });
   };
   return (
