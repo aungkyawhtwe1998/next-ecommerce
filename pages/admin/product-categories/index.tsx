@@ -17,7 +17,7 @@ const ProuctCategories = ({ categories }: Categories) => {
 
   async function create(data: Category) {
     try {
-      const res = await apiInstance.post(`/product-categories/create`);
+      const res = await apiInstance.post(`/product-categories/create`, JSON.stringify(data));
       if(res.data){
         deleteProduct(res.data.id);
         setForm({ name: "" });
