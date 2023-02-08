@@ -118,6 +118,7 @@ export const authOptions: any = {
   },
     
   },
+  secret: process.env.JWT_SECRET,
   
 };
 
