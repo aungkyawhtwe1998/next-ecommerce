@@ -35,12 +35,12 @@ const OrderModal = ({ isOpen }: ShoppingCartProps) => {
   };
   if (!isOpen) return null;
   return (
-    <div className="top-0 right-0 fixed bg-gray-700 min-w-[25vw] min-h-full p-3">
+    <div className="top-0 right-0 fixed bg-slate-300 dark:bg-gray-700 min-w-[25vw] min-h-full p-3">
       <div className="flex justify-between mb-3 align-middle overflow-y-scroll py-5">
-        <span className="text-xl text-gray-100">Cart Items</span>
+        <span className="text-xl ">Cart Items</span>
 
         <button
-          className="text-red-300"
+          className="text-yellow-600"
           onClick={() => dispatch(closeCart())}>
           Close
         </button>
@@ -55,7 +55,7 @@ const OrderModal = ({ isOpen }: ShoppingCartProps) => {
       </div>
       <div>
         <button
-          className="w-full bg-blue-900 p-2"
+          className="w-full bg-gray-300 rounded text-black p-2"
           onClick={handleOrder}>
           Order Now
         </button>
