@@ -35,7 +35,7 @@ const Order = () => {
   useEffect(() => {
     getOrder();
   }, []);
-  async function getOrder() {
+  const getOrder = async () => {
     try {
       let result = await apiInstance.get<Order[]>(
         `http://localhost:3000/api/orders/get`,
@@ -47,12 +47,11 @@ const Order = () => {
     } catch (error) {
       console.log(error);
     }
+  };
 
-  }
-
-  const handleViewOrder = (id:number) =>{
+  const handleViewOrder = (id: number) => {
     router.replace(`/admin/orders/:${id}`);
-  }
+  };
   return (
     <>
       <Header />
@@ -211,7 +210,7 @@ const Order = () => {
                 <th
                   scope="row"
                   className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                  <UserIcon className="w-10 h-10 text-gray-500"/>
+                  <UserIcon className="w-10 h-10 text-gray-500" />
                   <div className="pl-3">
                     <div className="text-base font-semibold">
                       {order.customer.name}
@@ -238,7 +237,7 @@ const Order = () => {
                 </td>
                 <td className="px-6 py-4">
                   <button
-                    onClick={()=>handleViewOrder(order.id)}
+                    onClick={() => handleViewOrder(order.id)}
                     className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                     Detail
                   </button>

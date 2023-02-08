@@ -8,7 +8,7 @@ import {
 } from "../features/customer/CustomerSlice";
 import { signIn, SignInResponse } from "next-auth/react";
 import apiInstance from "../lib/url";
-const signin = () => {
+const Signin = () => {
   const route = useRouter();
   const dispatch = useDispatch();
   const customer = useSelector(selectCustomer);
@@ -184,4 +184,4 @@ const signin = () => {
   );
 };
 
-export default signin;
+export default Signin;

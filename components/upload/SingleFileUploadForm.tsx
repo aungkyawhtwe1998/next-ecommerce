@@ -62,7 +62,7 @@ const SingleFileUploadForm = () => {
       var formData = new FormData();
       formData.append("media", file);
       formData.append("name", name);
-      formData.append("price", price);
+      formData.append("price", price+"");
       formData.append("imageUrl","");
       apiInstance.post("/api/upload",formData,{
         headers:{ "Content-Type": "multipart/form-data" }

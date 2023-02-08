@@ -94,7 +94,7 @@ const OrderPage = () => {
               </thead>
               <tbody>
                 {orders.map((order) => (
-                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                  <tr key={order.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <td className="w-32 p-4">
                       {/* <img
                         width={30}

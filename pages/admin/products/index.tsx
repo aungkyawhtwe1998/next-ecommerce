@@ -94,9 +94,9 @@ const Home: NextPage<Props> = ({ products, categories }) => {
       var formData = new FormData();
       formData.append("media", file);
       formData.append("name", name);
-      formData.append("price", price);
-      formData.append("quantity", quantity);
-      formData.append("categoryId", categoryId);
+      formData.append("price", price+"");
+      formData.append("quantity", quantity+"");
+      formData.append("categoryId", categoryId+"");
       formData.append("imageUrl", "");
       const res = await apiInstance.post("/products/create", formData, {
         headers: {

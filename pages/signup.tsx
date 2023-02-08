@@ -12,7 +12,7 @@ type Value = {
   cpassword: string;
   passcode?: number;
 };
-const signup = () => {
+const Signup = () => {
   const router = useRouter();
 
   const onSubmit = async (values: Value) => {
@@ -214,4 +214,4 @@ const signup = () => {
   );
 };
 
-export default signup;
+export default Signup;

@@ -4,7 +4,6 @@ import { cartQuantity, openCart, isOpen } from "../features/cart/CartSlice";
 import OrderModal from "./OrderModal";
 import { signIn, useSession, signOut, getSession } from "next-auth/react";
 import { useState } from "react";
-import { userAgent } from "next/server";
 import { ShoppingCartIcon, UserIcon } from '@heroicons/react/24/solid'
 const Header = () => {
   // const { openCart } = useShoppingCart();
