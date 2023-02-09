@@ -4,6 +4,7 @@ import { closeCart, removeAllItems, selectItems } from "../features/cart/CartSli
 import { selectCustomer } from "../features/customer/CustomerSlice";
 import apiInstance from "../lib/url";
 import CartItem from "./CartItem";
+import {toast} from 'react-toastify';
 import { v4 as uuidv4 } from "uuid";
 type ShoppingCartProps = {
   isOpen: boolean;
@@ -27,7 +28,12 @@ const OrderModal = ({ isOpen }: ShoppingCartProps) => {
       });
       if (res.data) {
         dispatch(removeAllItems());
+        toast.success('Order success');
         console.log("order success");
+        dispatch(closeCart())
+      }
+      if(res?.error){
+        toast.error(res.error)
       }
     } catch (error) {
       console.log(error);

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FormEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import {toast} from 'react-toastify';
 import {
   selectCustomer,
   addCustomer,
@@ -33,13 +34,14 @@ const Signin = () => {
       setMessage(res.error);
       form.email = "";
       form.password = "";
+      toast.error(res.error)
       setTimeout(() => {
         setMessage("");
       }, 2000);
     }
+  
 
     if (res?.ok) {
-      
       await storeUser();
     }
   };

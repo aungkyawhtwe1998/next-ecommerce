@@ -1,4 +1,4 @@
-import { prisma } from './../../../lib/prisma';
+import { prisma } from '../../../lib/prisma';
 import { NextApiResponse } from 'next';
 import { NextApiRequest } from 'next';
 export default async function handler(req:NextApiRequest, res: NextApiResponse) {
@@ -19,10 +19,10 @@ export default async function handler(req:NextApiRequest, res: NextApiResponse) 
             res.status(200).json({message:'order success'})
     
         } catch (error) {
-            return res.status(400).json({ message: error });
+            return res.status(400).json({ error: error });
         }  
     }else{
-        return res.status(400).json({ message: 'Invalid Method!' });
+        return res.status(400).json({ error: 'Invalid Method!' });
 
     }
       

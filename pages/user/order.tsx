@@ -39,12 +39,14 @@ const OrderPage = () => {
   async function getOrder() {
     try {
       let result = await apiInstance.get<Order[]>(
-        `http://localhost:3000/api/orders/get`,
-        { params: { customerId: 2 } }
+        `/orders/get`,
+        { params: { customerId } }
       );
-      console.log(result.data);
-      setOrders(result.data);
-      console.log("orders", orders);
+      if(result.data){
+        console.log('orders', result.data);
+        setOrders(result.data);
+      }
+      
     } catch (error) {
       console.log(error);
     }

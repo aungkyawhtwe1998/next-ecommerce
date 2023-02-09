@@ -38,7 +38,7 @@ const Order = () => {
   const getOrder = async () => {
     try {
       let result = await apiInstance.get<Order[]>(
-        `http://localhost:3000/api/orders/get`,
+        `/orders/get`,
         { params: { customerId: 2 } }
       );
       console.log(result.data);
