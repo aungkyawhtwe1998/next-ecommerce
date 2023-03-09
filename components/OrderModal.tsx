@@ -32,9 +32,9 @@ const OrderModal = ({ isOpen }: ShoppingCartProps) => {
         console.log("order success");
         dispatch(closeCart())
       }
-      if(res?.error){
-        toast.error(res.error)
-      }
+      // if(res?.error){
+      //   toast.error(res.error)
+      // }
     } catch (error) {
       console.log(error);
     }
